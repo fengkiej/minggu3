@@ -106,11 +106,22 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        dinginRB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                hitungDanTampilkan();
+            }
+        });
 
+        panasRB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                hitungDanTampilkan();
+            }
+        });
     }
 
     private void hitungDanTampilkan(){
-
         int nomerTerpilih = jenisLaundrySpinner.getSelectedItemPosition();
 
         double hargaPerKilo = 0;
@@ -143,7 +154,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         int diskon = diskonSeekbar.getProgress();
-
+        if(panasRB.isChecked()){
+            hargaPerKilo = hargaPerKilo + hargaPerKilo*50/100;
+        }
         double totalHarga = (hargaPerKilo*berat) - (hargaPerKilo * berat) * diskon/100;
 
         hargaTotalTV.setText( "Rp" + String.valueOf(totalHarga) );
